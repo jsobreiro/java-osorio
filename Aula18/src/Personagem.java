@@ -29,4 +29,11 @@ public class Personagem {
         this.ptsVida = ptsVida;
     }
 
+    @Override
+    public String toString() {
+
+        return "\nNome: " + nome +
+                "\nPontos de vida: " + ptsVida;
+    }
+
 }

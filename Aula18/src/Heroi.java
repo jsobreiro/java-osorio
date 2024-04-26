@@ -19,4 +19,10 @@ public class Heroi extends Personagem {
         this.classe = classe;
     }
 
+    @Override
+    public String toString() {
+
+        return super.toString() + "\nClasse: " + classe;
+    }
+
 }
