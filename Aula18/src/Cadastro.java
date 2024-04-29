@@ -17,4 +17,17 @@ public class Cadastro {
         return listaPersonagens.isEmpty();
     }
 
+    public static boolean verificarHeroisNaLista() {
+
+        for (Personagem tempPersonagem : listaPersonagens) {
+
+            if (tempPersonagem instanceof Heroi) {
+                return true;
+            }
+
+        }
+
+        return false;
+    }
+
 }

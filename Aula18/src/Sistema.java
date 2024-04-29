@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 public class Sistema {
 
     private static void exibirMenu() {
@@ -8,6 +6,7 @@ public class Sistema {
         System.out.println("1) Cadastrar Herói");
         System.out.println("2) Cadastrar Vilão");
         System.out.println("3) Listar personagens");
+        System.out.println("4) Listar Heróis");
         System.out.println("0) Sair");
         System.out.print("Informe uma Opção: ");
     }
@@ -69,6 +68,33 @@ public class Sistema {
 
     }
 
+    private static void listarHerois() {
+
+        if (Cadastro.verificarListaVazia()) {
+
+            System.out.println("\nNão há personagens cadastrados");
+            return;
+        }
+
+        if (!Cadastro.verificarHeroisNaLista()) {
+
+            System.out.println("\nNão há heróis cadastrados");
+            return;
+        }
+
+        System.out.println("\nHeróis cadastrados:");
+
+        for (Personagem tempPersonagem : Cadastro.listarPersonagens()) {
+
+            if (tempPersonagem instanceof Heroi) {
+
+                System.out.println(tempPersonagem);
+            }
+
+        }
+
+    }
+
     private static void verificarOpcao(int op) {
 
         switch (op) {
@@ -83,6 +109,10 @@ public class Sistema {
 
             case 3:
                 listarPersonagens();
+                break;
+
+            case 4:
+                listarHerois();
                 break;
 
             case 0:
