@@ -30,4 +30,17 @@ public class Cadastro {
         return false;
     }
 
+    public static boolean verificarViloesNaLista() {
+
+        for (Personagem tempPersonagem : listaPersonagens) {
+
+            if (tempPersonagem instanceof Vilao) {
+                return true;
+            }
+
+        }
+
+        return false;
+    }
+
 }
