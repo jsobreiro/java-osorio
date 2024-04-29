@@ -12,4 +12,9 @@ public class Cadastro {
         return listaPersonagens;
     }
 
+    public static boolean verificarListaVazia() {
+
+        return listaPersonagens.isEmpty();
+    }
+
 }
