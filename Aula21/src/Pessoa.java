@@ -1,4 +1,4 @@
-public abstract class Pessoa {
+public abstract class Pessoa implements Acoes {
 
     private String nome;
     private String email;
@@ -34,5 +34,7 @@ public abstract class Pessoa {
         return "\nNome: " + nome +
                 "\nE-mail: " + email;
     }
+
+    public abstract String falar();
 
 }

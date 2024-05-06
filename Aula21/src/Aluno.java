@@ -37,4 +37,18 @@ public class Aluno extends Pessoa {
                 "\nTurno em que estuda: " + turno;
     }
 
+    @Override
+    public String falar() {
+
+        return "O Aluno " + getNome() +
+                " está conversando com seus colegas...";
+    }
+
+    @Override
+    public String estudar() {
+
+        return "O Aluno " + getNome() +
+                " está estudando para a prova!";
+    }
+
 }

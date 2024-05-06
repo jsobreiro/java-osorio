@@ -26,4 +26,18 @@ public class Professor extends Pessoa {
                 "\nDisciplinas: " + disciplinas;
     }
 
+    @Override
+    public String falar() {
+
+        return "O Professor " + getNome() +
+                " está lecionando!";
+    }
+
+    @Override
+    public String estudar() {
+
+        return "O Professor " + getNome() +
+                " está preparando a aula";
+    }
+
 }
