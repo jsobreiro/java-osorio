@@ -1,3 +1,4 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Console {
@@ -14,8 +15,23 @@ public class Console {
 
     // método para ler e retornar um valor int:
     public static int lerInt() {
-        int valor = leitor.nextInt();
-        leitor.nextLine(); // limpeza de buffer
+        int valor = 0;
+
+        while (true) {
+            try {
+                valor = leitor.nextInt();
+                break;
+
+            } catch (InputMismatchException e) {
+                System.out.println("O valor digitado não é do tipo 'int'");
+                System.out.print("Digite novamente: ");
+
+            } finally {
+
+                leitor.nextLine(); // limpeza de buffer
+            }
+        }
+
         return valor;
     }
 
