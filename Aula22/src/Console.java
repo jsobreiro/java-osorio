@@ -37,8 +37,24 @@ public class Console {
 
     // método para ler e retornar um valor float:
     public static float lerFloat() {
-        float valor = leitor.nextFloat();
-        leitor.nextLine(); // limpeza de buffer
+
+        float valor = 0;
+        while (true) {
+
+            try {
+                valor = leitor.nextFloat();
+                break;
+
+            } catch (InputMismatchException e) {
+                System.out.println("O valor digitado não é do tipo 'float'");
+                System.out.print("Digite novamente: ");
+
+            } finally {
+
+                leitor.nextLine(); // limpeza de buffer
+            }
+
+        }
         return valor;
     }
 
