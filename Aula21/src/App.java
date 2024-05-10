@@ -24,5 +24,14 @@ public class App {
         Concurseiro concurseiro = new Concurseiro();
         System.out.println(concurseiro.estudar());
 
+        // Pessoa pode ser um Aluno:
+        Pessoa p1 = new Aluno();
+        // Pessoa pode ser um Professor:
+        Pessoa p2 = new Professor();
+        // Pessoa pode ser nulo:
+        Pessoa p3 = null;
+        // Mas não é possível instanciar um objeto do tipo Pessoa:
+        // Pessoa p4 = new Pessoa();
+
     }
 }
