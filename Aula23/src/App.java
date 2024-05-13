@@ -1,10 +1,13 @@
 import exercicio01.ContaCorrente;
 import exercicio01.ContaPoupanca;
+import exercicio02.ProdutoAlimenticio;
+import exercicio02.ProdutoEletronico;
 
 public class App {
     public static void main(String[] args) throws Exception {
 
-        exercicio01();
+        // exercicio01();
+        exercicio02();
 
     }
 
@@ -55,4 +58,40 @@ public class App {
         }
 
     }
+
+    private static void exercicio02() {
+
+        ProdutoEletronico pe = new ProdutoEletronico(123,
+                "LG GS8 Think Q", 15,
+                "Smart Phone");
+
+        ProdutoAlimenticio pa = new ProdutoAlimenticio(1356,
+                "Achocolatado", 50,
+                "2024-11-12");
+
+        System.out.println();
+
+        try {
+            pe.adicionarItem(10); // funciona
+            pa.adicionarItem(-2); // fornçando erro
+
+        } catch (Exception e) {
+
+            System.out.println(e.getMessage());
+        }
+
+        try {
+            pa.removerItem(10); // funciona
+            pe.removerItem(100); // forçando o erro
+
+        } catch (Exception e) {
+
+            System.out.println(e.getMessage());
+        }
+
+        pe.exibirItem();
+        pa.exibirItem();
+
+    }
+
 }
