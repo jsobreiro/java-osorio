@@ -1,7 +1,14 @@
 import exercicio01.ContaCorrente;
+import exercicio01.ContaPoupanca;
 
 public class App {
     public static void main(String[] args) throws Exception {
+
+        exercicio01();
+
+    }
+
+    private static void exercicio01() {
 
         // nova instancia da classe ContaCorrente:
         ContaCorrente cc = new ContaCorrente("Fulano da Silva",
@@ -31,7 +38,21 @@ public class App {
             System.out.println(e.getMessage());
         }
 
-        cc.exibirSaldo();
+        ///// TESTES COM CONTA POUPANÇA
+        ContaPoupanca cp = new ContaPoupanca("Beltrano Souza",
+                1235, 1000, 0.75f);
+
+        cp.exibirSaldo();
+
+        cp.depositar(300);
+
+        try {
+            cp.sacar(3000);
+
+        } catch (Exception e) {
+
+            System.out.println(e.getMessage());
+        }
 
     }
 }
