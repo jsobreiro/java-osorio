@@ -9,6 +9,14 @@ public class ContaCorrente extends ContaBancaria {
         this.chequeEspecial = chequeEspecial;
     }
 
+    public float getChequeEspecial() {
+        return chequeEspecial;
+    }
+
+    public void setChequeEspecial(float chequeEspecial) {
+        this.chequeEspecial = chequeEspecial;
+    }
+
     @Override
     public void sacar(float valor) throws Exception {
 
@@ -18,14 +26,14 @@ public class ContaCorrente extends ContaBancaria {
         }
 
         saldo -= valor;
-        System.out.println("O valor R$ " + valor +
+        System.out.println("\nO valor R$ " + valor +
                 " foi sacado da conta " + numeroConta);
     }
 
     @Override
     public void exibirSaldo() {
 
-        System.out.println("Conta corrente nº: " + numeroConta);
+        System.out.println("\nConta corrente nº: " + numeroConta);
         System.out.println("Nome do cliente: " + nomeCliente);
         System.out.println("Saldo atual R$: " + saldo);
         System.out.println("Cheque especial: R$ " + chequeEspecial);

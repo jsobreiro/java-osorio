@@ -18,7 +18,7 @@ public abstract class ContaBancaria {
 
         saldo += valor;
 
-        System.out.println("O valor R$ " + valor +
+        System.out.println("\nO valor R$ " + valor +
                 " foi depositado na conta " + numeroConta);
 
     }
