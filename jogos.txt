@@ -1,0 +1,3 @@
+1, The Last of Us, Acao/Aventura
+2, Super Mario World, Plataforma
+3, The Sims 4, Simulacao
