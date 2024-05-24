@@ -50,7 +50,7 @@ public abstract class GerenciadorRelogio {
 
     }
 
-    public Relogio buscarRelogio(int codigo) throws Exception {
+    public static Relogio buscarRelogio(int codigo) throws Exception {
 
         ArrayList<Relogio> listaRelogio = lerArquivo();
 
@@ -62,11 +62,11 @@ public abstract class GerenciadorRelogio {
             }
         }
 
-        throw new Exception("Relógio com o código " + codigo + " não localizado");
+        throw new Exception("\nRelógio com o código " + codigo + " não localizado");
 
     }
 
-    public void apagarRelogio(int codigo) throws Exception {
+    public static void apagarRelogio(int codigo) throws Exception {
 
         // chama o método que lê o arquivo e retorna um arraly list com os objetos
         ArrayList<Relogio> listaOriginal = lerArquivo();
@@ -90,7 +90,7 @@ public abstract class GerenciadorRelogio {
         if (listaOriginal.size() == novaLista.size()) {
 
             // Lança uma exceção neste caso
-            throw new Exception("Relógio com o código " + codigo + " não localizado");
+            throw new Exception("\nRelógio com o código " + codigo + " não localizado");
         }
 
         // sobrescrever o arquivo com os dados da nova lista

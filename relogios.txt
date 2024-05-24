@@ -1,3 +1,2 @@
-Código=1234, Marca=Tassio, Nome=TassiMax, Tipo=Digital
 Código=1235, Marca=Trolex, Nome=Gold, Tipo=Anal�gico
-Código=1236, Marca=Patek Philip, Nome=Ultra Caro, Tipo=Analogico
+Código=1237, Marca=Bla ble, Nome=Padrao, Tipo=Analogico
