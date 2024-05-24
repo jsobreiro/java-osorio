@@ -64,4 +64,15 @@ public class Relogio {
                 "Tipo de display: " + tipo;
     }
 
+    public void fromString(String linha) {
+
+        String[] partes = linha.split(", ");
+
+        codigo = Integer.parseInt(partes[0].split("=")[1]);
+        marca = partes[1].split("=")[1];
+        nome = partes[2].split("=")[1];
+        tipo = partes[3].split("=")[1];
+
+    }
+
 }

@@ -31,13 +31,9 @@ public abstract class GerenciadorRelogio {
 
             while ((linha = bReader.readLine()) != null) {
 
-                String[] dados = linha.split(", ");
+                Relogio tempRelogio = new Relogio();
 
-                Relogio tempRelogio = new Relogio(
-                        Integer.parseInt(dados[0].split("=")[1]),
-                        dados[1].split("=")[1],
-                        dados[2].split("=")[1],
-                        dados[3].split("=")[1]);
+                tempRelogio.fromString(linha);
 
                 listaRelogios.add(tempRelogio);
 
@@ -51,6 +47,65 @@ public abstract class GerenciadorRelogio {
         }
 
         return listaRelogios;
+
+    }
+
+    public Relogio buscarRelogio(int codigo) throws Exception {
+
+        ArrayList<Relogio> listaRelogio = lerArquivo();
+
+        for (Relogio tempRelogio : listaRelogio) {
+
+            if (tempRelogio.getCodigo() == codigo) {
+
+                return tempRelogio;
+            }
+        }
+
+        throw new Exception("Relógio com o código " + codigo + " não localizado");
+
+    }
+
+    public void apagarRelogio(int codigo) throws Exception {
+
+        // chama o método que lê o arquivo e retorna um arraly list com os objetos
+        ArrayList<Relogio> listaOriginal = lerArquivo();
+        // cria um novo array list
+        ArrayList<Relogio> novaLista = new ArrayList<>();
+
+        // percorrer a lista original
+        for (Relogio tempRelogio : listaOriginal) {
+
+            // se o objeto atual da lista original tiver um código DIFERENTE
+            // do codigo recebido via parametro
+            if (tempRelogio.getCodigo() != codigo) {
+                // adicionamos o objeto atual na nova lista
+                novaLista.add(tempRelogio);
+            }
+        }
+
+        // se as duas listas tiverem o mesmo tamanho, elas são iguais.
+        // OU SEJA, não foi encontrada na lista original nenhum relógio que
+        // contenha o código recebido via parametro
+        if (listaOriginal.size() == novaLista.size()) {
+
+            // Lança uma exceção neste caso
+            throw new Exception("Relógio com o código " + codigo + " não localizado");
+        }
+
+        // sobrescrever o arquivo com os dados da nova lista
+        try (FileWriter fWriter = new FileWriter(ARQUIVO);
+                BufferedWriter bWriter = new BufferedWriter(fWriter)) {
+
+            // percorrer a nova lista
+            for (Relogio tempRelogio : novaLista) {
+
+                // gravar linha a linha com os objetos presentes na lista
+                bWriter.write(tempRelogio.toString() + "\n");
+
+            }
+
+        }
 
     }
 
