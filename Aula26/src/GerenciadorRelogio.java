@@ -109,4 +109,42 @@ public abstract class GerenciadorRelogio {
 
     }
 
+    public static void atualizarRelogio(Relogio relogio) throws Exception {
+
+        ArrayList<Relogio> listaOriginal = lerArquivo();
+        ArrayList<Relogio> novaLista = new ArrayList<>();
+
+        for (Relogio tempRelogio : listaOriginal) {
+
+            if (tempRelogio.getCodigo() != relogio.getCodigo()) {
+
+                novaLista.add(tempRelogio);
+            } else {
+
+                novaLista.add(relogio);
+            }
+
+        }
+
+        try (FileWriter fWriter = new FileWriter(ARQUIVO);
+                BufferedWriter bWriter = new BufferedWriter(fWriter)) {
+
+            for (Relogio tempRelogio : novaLista) {
+
+                bWriter.write(tempRelogio.toString() + "\n");
+            }
+        }
+
+    }
+
+    public static void apagarTodos() throws IOException {
+
+        try (FileWriter fWriter = new FileWriter(ARQUIVO);
+                BufferedWriter bWriter = new BufferedWriter(fWriter)) {
+
+            bWriter.write("");
+        }
+
+    }
+
 }

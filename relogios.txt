@@ -1,2 +1,0 @@
-Código=1235, Marca=Trolex, Nome=Gold, Tipo=Anal�gico
-Código=1237, Marca=Bla ble, Nome=Padrao, Tipo=Analogico

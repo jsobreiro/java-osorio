@@ -9,6 +9,8 @@ public class Sistema {
         System.out.println("2) Buscar");
         System.out.println("3) Apagar");
         System.out.println("4) Listar todos");
+        System.out.println("5) Atualizar");
+        System.out.println("6) Apagar todos");
         System.out.println("0) Sair");
 
     }
@@ -85,6 +87,49 @@ public class Sistema {
         }
     }
 
+    private static void atualizar() {
+
+        System.out.println("\nAtualizar Relógio");
+
+        int codigo = Console.lerInt("Informe o codigo do Relógio:");
+
+        try {
+
+            Relogio tempRelogio = GerenciadorRelogio.buscarRelogio(codigo);
+
+            String marca = Console.lerString("Informe a nova marca:");
+            String nome = Console.lerString("Informe o novo nome:");
+            String tipo = Console.lerString("Informe o novo tipo:");
+
+            tempRelogio.setMarca(marca);
+            tempRelogio.setNome(nome);
+            tempRelogio.setTipo(tipo);
+
+            GerenciadorRelogio.atualizarRelogio(tempRelogio);
+
+            System.out.println("\nRelógio " + codigo + " atualizado com sucesso!");
+
+        } catch (Exception e) {
+
+            System.out.println(e.getMessage());
+        }
+
+    }
+
+    private static void apagarTodos() {
+
+        try {
+
+            GerenciadorRelogio.apagarTodos();
+            System.out.println("\nATENÇÃO: Todos os relógios foram apagados do arquivo!");
+
+        } catch (IOException e) {
+
+            System.out.println(e.getMessage());
+        }
+
+    }
+
     public static void executar() {
 
         while (true) {
@@ -107,6 +152,14 @@ public class Sistema {
 
                 case 4:
                     listarTodos();
+                    break;
+
+                case 5:
+                    atualizar();
+                    break;
+
+                case 6:
+                    apagarTodos();
                     break;
 
                 case 0:
