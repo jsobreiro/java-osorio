@@ -76,7 +76,7 @@ public class Sistema {
 
         try {
 
-            for (Relogio tempRelogio : GerenciadorRelogio.lerArquivo()) {
+            for (Relogio tempRelogio : GerenciadorRelogio.getListaRelogios()) {
 
                 System.out.println(tempRelogio.exibirDados() + "\n");
             }
@@ -123,7 +123,7 @@ public class Sistema {
             GerenciadorRelogio.apagarTodos();
             System.out.println("\nATENÇÃO: Todos os relógios foram apagados do arquivo!");
 
-        } catch (IOException e) {
+        } catch (Exception e) {
 
             System.out.println(e.getMessage());
         }
@@ -131,6 +131,13 @@ public class Sistema {
     }
 
     public static void executar() {
+
+        try {
+            GerenciadorRelogio.lerArquivo();
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
 
         while (true) {
 

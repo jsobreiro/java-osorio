@@ -1,0 +1,1 @@
+Código=1, Marca=lalala, Nome=1234, Tipo=digital

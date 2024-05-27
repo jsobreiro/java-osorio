@@ -8,6 +8,7 @@ import java.util.ArrayList;
 public abstract class GerenciadorRelogio {
 
     private static final String ARQUIVO = "relogios.txt";
+    private static ArrayList<Relogio> listaRelogios = new ArrayList<>();
 
     public static void salvarRelogio(Relogio relogio) throws IOException {
 
@@ -20,9 +21,15 @@ public abstract class GerenciadorRelogio {
 
     }
 
-    public static ArrayList<Relogio> lerArquivo() throws IOException, Exception {
+    public static ArrayList<Relogio> getListaRelogios() throws Exception {
 
-        ArrayList<Relogio> listaRelogios = new ArrayList<>();
+        verirficarListaVazia();
+        return listaRelogios;
+    }
+
+    public static void lerArquivo() throws IOException {
+
+        listaRelogios.clear();
 
         try (FileReader fReader = new FileReader(ARQUIVO);
                 BufferedReader bReader = new BufferedReader(fReader)) {
@@ -41,20 +48,21 @@ public abstract class GerenciadorRelogio {
 
         }
 
+    }
+
+    private static void verirficarListaVazia() throws Exception {
+
         if (listaRelogios.isEmpty()) {
 
-            throw new Exception("ATENÇÃO: Não há relógios cadastrados.");
+            throw new Exception("\nATENÇÃO: Não há relógios cadastrados");
         }
-
-        return listaRelogios;
-
     }
 
     public static Relogio buscarRelogio(int codigo) throws Exception {
 
-        ArrayList<Relogio> listaRelogio = lerArquivo();
+        verirficarListaVazia();
 
-        for (Relogio tempRelogio : listaRelogio) {
+        for (Relogio tempRelogio : listaRelogios) {
 
             if (tempRelogio.getCodigo() == codigo) {
 
@@ -66,84 +74,75 @@ public abstract class GerenciadorRelogio {
 
     }
 
+    private static void atualizarArquivo() throws IOException {
+
+        try (FileWriter fWriter = new FileWriter(ARQUIVO);
+                BufferedWriter bWriter = new BufferedWriter(fWriter)) {
+
+            for (Relogio tempRelogio : listaRelogios) {
+
+                bWriter.write(tempRelogio.toString() + "\n");
+            }
+
+        }
+
+    }
+
     public static void apagarRelogio(int codigo) throws Exception {
 
-        // chama o método que lê o arquivo e retorna um arraly list com os objetos
-        ArrayList<Relogio> listaOriginal = lerArquivo();
-        // cria um novo array list
-        ArrayList<Relogio> novaLista = new ArrayList<>();
+        verirficarListaVazia();
 
-        // percorrer a lista original
-        for (Relogio tempRelogio : listaOriginal) {
+        boolean encontrou = false;
 
-            // se o objeto atual da lista original tiver um código DIFERENTE
-            // do codigo recebido via parametro
-            if (tempRelogio.getCodigo() != codigo) {
-                // adicionamos o objeto atual na nova lista
-                novaLista.add(tempRelogio);
+        for (Relogio tempRelogio : listaRelogios) {
+
+            if (tempRelogio.getCodigo() == codigo) {
+
+                listaRelogios.remove(tempRelogio);
+                encontrou = true;
+                break;
             }
         }
 
-        // se as duas listas tiverem o mesmo tamanho, elas são iguais.
-        // OU SEJA, não foi encontrada na lista original nenhum relógio que
-        // contenha o código recebido via parametro
-        if (listaOriginal.size() == novaLista.size()) {
+        if (!encontrou) {
 
             // Lança uma exceção neste caso
             throw new Exception("\nRelógio com o código " + codigo + " não localizado");
         }
 
-        // sobrescrever o arquivo com os dados da nova lista
-        try (FileWriter fWriter = new FileWriter(ARQUIVO);
-                BufferedWriter bWriter = new BufferedWriter(fWriter)) {
-
-            // percorrer a nova lista
-            for (Relogio tempRelogio : novaLista) {
-
-                // gravar linha a linha com os objetos presentes na lista
-                bWriter.write(tempRelogio.toString() + "\n");
-
-            }
-
-        }
+        atualizarArquivo();
 
     }
 
     public static void atualizarRelogio(Relogio relogio) throws Exception {
 
-        ArrayList<Relogio> listaOriginal = lerArquivo();
-        ArrayList<Relogio> novaLista = new ArrayList<>();
+        verirficarListaVazia();
 
-        for (Relogio tempRelogio : listaOriginal) {
+        for (Relogio tempRelogio : listaRelogios) {
 
-            if (tempRelogio.getCodigo() != relogio.getCodigo()) {
+            if (tempRelogio.getCodigo() == relogio.getCodigo()) {
 
-                novaLista.add(tempRelogio);
-            } else {
-
-                novaLista.add(relogio);
+                tempRelogio = relogio;
             }
 
         }
 
-        try (FileWriter fWriter = new FileWriter(ARQUIVO);
-                BufferedWriter bWriter = new BufferedWriter(fWriter)) {
-
-            for (Relogio tempRelogio : novaLista) {
-
-                bWriter.write(tempRelogio.toString() + "\n");
-            }
-        }
+        atualizarArquivo();
 
     }
 
-    public static void apagarTodos() throws IOException {
+    public static void apagarTodos() throws IOException, Exception {
+
+        verirficarListaVazia();
 
         try (FileWriter fWriter = new FileWriter(ARQUIVO);
                 BufferedWriter bWriter = new BufferedWriter(fWriter)) {
 
             bWriter.write("");
+            listaRelogios.clear();
         }
+
+        atualizarArquivo();
 
     }
 
