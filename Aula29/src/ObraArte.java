@@ -63,6 +63,18 @@ public class ObraArte {
                 + tipoObra + ", localizacao=" + localizacao;
     }
 
+    public void fromString(String linha) {
+
+        String[] partes = linha.split(", ");
+
+        titulo = partes[0].split("=")[1];
+        artista = partes[1].split("=")[1];
+        anoCriacao = Integer.parseInt(partes[2].split("=")[1]);
+        tipoObra = partes[3].split("=")[1];
+        localizacao = partes[4].split("=")[1];
+
+    }
+
     public String exibirDados() {
         return "\nTítulo: " + titulo +
                 "\nArtista: " + artista +
