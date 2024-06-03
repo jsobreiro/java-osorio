@@ -1,5 +1,6 @@
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -46,6 +47,22 @@ public abstract class ObraPersistencia {
 
             }
 
+        }
+
+    }
+
+    public static void criarArquivoSeNaoExistir() {
+
+        try {
+            File arquivo = new File(ARQUIVO);
+
+            if (!arquivo.exists()) {
+                arquivo.createNewFile();
+            }
+
+        } catch (IOException exception) {
+
+            exception.printStackTrace();
         }
 
     }
