@@ -1,17 +1,41 @@
 public class App {
     public static void main(String[] args) throws Exception {
 
-        System.out.println("Nova obra de arte:");
+        ObraArte obra1 = new ObraArte("Pintura Famosa", "Fulano de tal", 2020, "Pintura", "Galeria Principal");
+        ObraArte obra2 = new ObraArte("Fotografia X", "Cicrano de Tal", 1999, "Fotografia", "Salão de Fotos");
+        ObraArte obra3 = new ObraArte("Escultura épica", "Sr Escultor", 1755, "Escultura", "Hall Principal");
 
-        String titulo = Console.lerString("Título da obra:");
-        String artista = Console.lerString("Artista:");
-        int anoCriacao = Console.lerInt("Ano de criação:");
-        String tipoObra = Console.lerString("Tipo de obra (pintura, escultura fotografia):");
-        String localizacao = Console.lerString("Localização no museu:");
+        GerenciadorObrasArte.salvarObra(obra1);
+        GerenciadorObrasArte.salvarObra(obra2);
+        GerenciadorObrasArte.salvarObra(obra3);
 
-        ObraArte obraArte = new ObraArte(titulo, artista, anoCriacao, tipoObra, localizacao);
+        System.out.println("\nObras cadastradas:");
 
-        System.out.println("\nObra cadastrada:" + obraArte.exibirDados());
+        for (ObraArte tempObra : GerenciadorObrasArte.getListaObras()) {
+
+            System.out.println(tempObra.exibirDados());
+        }
+
+        System.out.println("\nProcurar a obra 'bolinho':");
+
+        try {
+            ObraArte busca1 = GerenciadorObrasArte.buscarObra("bolinho");
+            System.out.println(busca1.exibirDados());
+
+        } catch (Exception exception) {
+            System.out.println(exception.getMessage());
+        }
+
+        System.out.println("\nProcurar a obra 'Famosa':");
+
+        try {
+            ObraArte busca2 = GerenciadorObrasArte.buscarObra("Famosa");
+            System.out.println(busca2.exibirDados());
+
+        } catch (Exception exception) {
+
+            System.out.println(exception.getMessage());
+        }
 
     }
 }
