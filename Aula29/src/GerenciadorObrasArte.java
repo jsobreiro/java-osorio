@@ -26,4 +26,8 @@ public abstract class GerenciadorObrasArte {
 
     }
 
+    public static void excluirObra(ObraArte obra) {
+        listaObras.remove(obra);
+    }
+
 }

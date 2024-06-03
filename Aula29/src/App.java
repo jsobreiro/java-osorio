@@ -9,13 +9,6 @@ public class App {
         GerenciadorObrasArte.salvarObra(obra2);
         GerenciadorObrasArte.salvarObra(obra3);
 
-        System.out.println("\nObras cadastradas:");
-
-        for (ObraArte tempObra : GerenciadorObrasArte.getListaObras()) {
-
-            System.out.println(tempObra.exibirDados());
-        }
-
         System.out.println("\nProcurar a obra 'bolinho':");
 
         try {
@@ -35,6 +28,26 @@ public class App {
         } catch (Exception exception) {
 
             System.out.println(exception.getMessage());
+        }
+
+        System.out.println("\nTentar apagar obra que contenha a letra 'X'");
+
+        try {
+
+            ObraArte busca3 = GerenciadorObrasArte.buscarObra("X");
+            GerenciadorObrasArte.excluirObra(busca3);
+            System.out.println("Obra de arte " + busca3.getTitulo() + " excluído com sucesso");
+
+        } catch (Exception exception) {
+
+            System.out.println(exception.getMessage());
+        }
+
+        System.out.println("\nObras cadastradas:");
+
+        for (ObraArte tempObra : GerenciadorObrasArte.getListaObras()) {
+
+            System.out.println(tempObra.exibirDados());
         }
 
     }
