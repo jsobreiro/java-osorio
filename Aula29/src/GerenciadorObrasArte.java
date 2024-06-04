@@ -30,4 +30,11 @@ public abstract class GerenciadorObrasArte {
         listaObras.remove(obra);
     }
 
+    public static void verificarListaVazia() throws Exception {
+
+        if (listaObras.isEmpty()) {
+            throw new Exception("\nATENÇÃO: Não há obras cadastradas");
+        }
+    }
+
 }

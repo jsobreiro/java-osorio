@@ -39,70 +39,64 @@ public class Sistema {
 
     }
 
-    private static void buscarObra() {
+    
+    private static void buscarObra(int modo) {
 
-        System.out.println("\nBusca de obra por título:");
-        String titulo = Console.lerString("Informe o título:");
-
+        /*
+         * modo:
+         * 3 = apagar
+         * 2 = editar
+         * 1 ou default = exibir
+         */
+        
         try {
+            
+            GerenciadorObrasArte.verificarListaVazia();
+            
+            String titulo = Console.lerString("Informe o título:");
 
             ObraArte busca = GerenciadorObrasArte.buscarObra(titulo);
 
-            System.out.println("\nObra localizada: " + busca.exibirDados());
+            switch (modo) {
+                case 3: // apagar obra de arte
 
-        } catch (Exception exception) {
+                    GerenciadorObrasArte.excluirObra(busca);
 
-            System.out.println(exception.getMessage());
-        }
+                    ObraPersistencia.salvarNoArquivo();
 
-    }
+                    System.out.println("\nObra de arte " + busca.getTitulo() + " excluída com sucesso!");
 
-    private static void apagarObra() {
+                    break;
 
-        System.out.println("\nApagar obra por título:");
-        String titulo = Console.lerString("Informe o título:");
+                case 2: // editar dados da obra de arte
 
-        try {
+                    System.out.println("\nInforme os novos dados:");
 
-            ObraArte busca = GerenciadorObrasArte.buscarObra(titulo);
+                    titulo = Console.lerString("Título da obra:");
+                    String artista = Console.lerString("Artista:");
+                    int anoCriacao = Console.lerInt("Ano de criação:");
+                    String tipoObra = Console.lerString("Tipo de obra:");
+                    String localizacao = Console.lerString("Localização no museu:");
+        
+                    busca.setTitulo(titulo);
+                    busca.setArtista(artista);
+                    busca.setAnoCriacao(anoCriacao);
+                    busca.setTipoObra(tipoObra);
+                    busca.setLocalizacao(localizacao);
+        
+                    ObraPersistencia.salvarNoArquivo();
 
-            GerenciadorObrasArte.excluirObra(busca);
+                    System.out.println("\nObra atualizada: " + busca.exibirDados() + "\n");
 
-            ObraPersistencia.salvarNoArquivo();
+                    break;
+            
+                case 1: // exbir dados da obra de arte
+                default: // idem a opção 1
+                    
+                    System.out.println("\nObra localizada: " + busca.exibirDados());
+                    break;
+            }
 
-            System.out.println("\nObra de arte " + busca.getTitulo() + " excluída com sucesso!");
-
-        } catch (Exception exception) {
-
-            System.out.println(exception.getMessage());
-        }
-
-    }
-
-    private static void atualizarDados() {
-
-        System.out.println("\nAtualizar obra por título:");
-        String titulo = Console.lerString("Informe o título:");
-
-        try {
-
-            ObraArte busca = GerenciadorObrasArte.buscarObra(titulo);
-
-            System.out.println("\nInforme os novos dados:");
-
-            titulo = Console.lerString("Título da obra:");
-            String artista = Console.lerString("Artista:");
-            int anoCriacao = Console.lerInt("Ano de criação:");
-            String tipoObra = Console.lerString("Tipo de obra:");
-            String localizacao = Console.lerString("Localização no museu:");
-
-            busca.setTitulo(titulo);
-            busca.setArtista(artista);
-            busca.setAnoCriacao(anoCriacao);
-            busca.setTipoObra(tipoObra);
-            busca.setLocalizacao(localizacao);
-
-            ObraPersistencia.salvarNoArquivo();
 
         } catch (Exception exception) {
 
@@ -115,17 +109,21 @@ public class Sistema {
 
         ArrayList<ObraArte> listaObras = GerenciadorObrasArte.getListaObras();
 
-        if (listaObras.isEmpty()) {
+        try {
+            GerenciadorObrasArte.verificarListaVazia();
+            
+            System.out.println("\nObras Cadastradas:");
+            for (ObraArte obraArte : listaObras) {
+    
+                System.out.println(obraArte.exibirDados());
+            }
 
-            System.out.println("\nNão há obras cadastradas!");
-            return;
+        } catch (Exception exception) {
+
+            System.out.println(exception.getMessage());
         }
 
-        System.out.println("\nObras Cadastradas:");
-        for (ObraArte obraArte : listaObras) {
-
-            System.out.println(obraArte.exibirDados());
-        }
+        
 
     }
 
@@ -137,15 +135,15 @@ public class Sistema {
                 break;
 
             case 2:
-                buscarObra();
+                buscarObra(1); // exibir
                 break;
 
             case 3:
-                atualizarDados();
+                buscarObra(2); // editar
                 break;
 
             case 4:
-                apagarObra();
+                buscarObra(3); // apagar
                 break;
 
             case 5:
